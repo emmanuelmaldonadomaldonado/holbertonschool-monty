@@ -6,7 +6,7 @@ Monty 0.98 is a versatile scripting language compiled into Monty byte codes, aki
 
 # Monty Byte Code Files
 
-Files housing Monty byte codes generally carry the .m extension. While the industry often adheres to this standard, it is not mandated by the language specification. Each line typically contains a single instruction, allowing any number of spaces before or after the opcode and its argument:
+Files housing Monty byte codes generally carry the .m extension. While the industry often adheres to this standard, it is not mandated by the language specification. Each line typically contains a single instruction, allowing any number of spaces before or after the opcode and its argument.
 
 # Compile all files using the following form:
 

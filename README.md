@@ -19,25 +19,8 @@ Files housing Monty byte codes generally carry the .m extension. While the indus
 
 # Opcode	Description
 
-| Header 1 | Header 2 |
+| opcode | description |
 |----------|----------|
-| push   | pushes an element |
-| Cell 3   | Cell 4   |
-
-|push|	|Pushes an element onto the stack. e.g (push 1 # pushes 1 into the stack)|
-
-pall	Prints all values on the stack, starting from the top.
-pint	Prints the value at the top of the stack.
-pop	Removes the top element of the stack.
-swap	Swaps the top two elements of the stack.
-add	Adds the top two elements of the stack, storing the result in the second node.
-nop	No-operation; does not affect the stack.
-sub	Subtracts the top element from the second top element, storing the result in the second node.
-div	Divides the second top element by the top element, storing the result in the second node.
-mul	Multiplies the top two elements, storing the result in the second node.
-mod	Computes the remainder of the second top element divided by the top element.
-pchar	Prints the ASCII representation of the integer at the top of the stack.
-pstr	Prints the ASCII representation of integers in the stack until 0 or a non-ASCII value.
-rotl	Rotates the top of the stack to the bottom.
-rotr	Rotates the bottom of the stack to the top.
-stack	Default behavior; sets the format of the data into a stack (LIFO).
+| push   | pushes an element onto the stack |
+| pall   | Prints all values on the stack, starting from the top |
+| pint   | Prints the value at the top of of the stack |

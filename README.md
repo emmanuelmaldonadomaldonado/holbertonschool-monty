@@ -19,7 +19,7 @@ Files housing Monty byte codes generally carry the .m extension. While the indus
 
 # Opcode	Description
 
-| opcode | description |
+| Opcode | Description |
 |----------|----------|
 | push   | pushes an element onto the stack |
 | pall   | Prints all values on the stack, starting from the top |

@@ -16,7 +16,6 @@ Files housing Monty byte codes generally carry the .m extension. While the indus
 
 	./monty bytecode_file
 
-# Opcode	Description
 
 | Opcode | Description |
 |----------|----------|

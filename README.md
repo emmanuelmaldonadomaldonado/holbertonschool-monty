@@ -11,7 +11,6 @@ Files housing Monty byte codes generally carry the .m extension. While the indus
 # Compile all files using the following form:
 
 	gcc -Wall -Werror -Wextra -pedantic *.c -o monty
-	To execute the program:
 
 # To execute the program:
 

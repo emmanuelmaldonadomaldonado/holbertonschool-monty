@@ -19,7 +19,8 @@ Files housing Monty byte codes generally carry the .m extension. While the indus
 
 # Opcode	Description
 
-|push|	Pushes an element onto the stack. e.g (push 1 # pushes 1 into the stack)|
+|push|	|Pushes an element onto the stack. e.g (push 1 # pushes 1 into the stack)|
+
 pall	Prints all values on the stack, starting from the top.
 pint	Prints the value at the top of the stack.
 pop	Removes the top element of the stack.

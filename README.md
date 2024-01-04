@@ -19,6 +19,11 @@ Files housing Monty byte codes generally carry the .m extension. While the indus
 
 # Opcode	Description
 
+| Header 1 | Header 2 |
+|----------|----------|
+| push   | pushes an element |
+| Cell 3   | Cell 4   |
+
 |push|	|Pushes an element onto the stack. e.g (push 1 # pushes 1 into the stack)|
 
 pall	Prints all values on the stack, starting from the top.

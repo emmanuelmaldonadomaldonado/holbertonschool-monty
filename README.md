@@ -26,14 +26,3 @@ Files housing Monty byte codes generally carry the .m extension. While the indus
 | swap   | Swaps the top two elements of the stack |
 | add    | Adds the top two elements of the stack, storing the result in the second node |
 | nop    | No-operation; does not affect the stack |
-| sub    | Subtracts the top element from the second top element, storing the result in the second node |
-| div    | Divides the second top element by the top element, storing the result in the second node |
-| mul    | Multiplies the top two elements, storing the result in the second node |
-| mod    | Computes the remainder of the second top element divided by the top element |
-| #      | Comment indicator; the line is treated as a comment |
-| pchar  | Prints the ASCII representation of the integer at the top of the stack |
-| pstr   | Prints the ASCII representation of integers in the stack until 0 or a non-ASCII value |
-| rotl   | Rotates the top of the stack to the bottom |
-| rotr   | Rotates the bottom of the stack to the top |
-| stack  | Default behavior; sets the format of the data into a stack (LIFO) |
-| queue  | Sets the format of the data into a queue (FIFO) |

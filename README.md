@@ -38,4 +38,3 @@
 | rotr   | Rotates the bottom of the stack to the top |
 | stack  | Default behavior; sets the format of the data into a stack (LIFO) |
 | queue  | Sets the format of the data into a queue (FIFO) |
-0 comments on commit 7cc1c2a

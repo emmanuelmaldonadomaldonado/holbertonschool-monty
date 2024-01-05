@@ -6,20 +6,25 @@
  * Return: no return
  */
 
-void f_pint(stack_t **head, unsigned int number)
+void f_pint(stack_t **stack, unsigned int line_number)
 {
+    if (*stack == NULL)
+    {
+        fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+        free_stack(stack);
+        exit(EXIT_FAILURE);
+    }
 
-	if (*head == NULL)
+    printf("%d\n", (*stack)->n);
+}
 
-        {
-
-                fprintf(stderr, "L%u: cant't pint, stack empty\n", number);
-                fclose(bus.file);
-                free(bus.content);
-                free_stack(*head);
-                exit(EXIT_FAILURE);
-
-                }
-
-        printf("%d\n", (*head)->n);
-                                        }
+/**
+ * nop - does nothing
+ * @stack: pointer to the stack
+ * @line_number: line number in the fil
+ */
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}

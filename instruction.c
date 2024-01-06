@@ -6,7 +6,7 @@
 instruction_t instructions[] = {
     {"push", push},
     {"pall", pall},
-    /* Agrega aquí otras instrucciones según sea necesario */
+    {"pint", pint},
     {NULL, NULL} // Marcar el final del array
 };
 

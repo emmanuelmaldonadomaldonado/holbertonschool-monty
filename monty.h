@@ -38,6 +38,7 @@ void pall(stack_t **stack, unsigned int line_number, int value);
 void pint(stack_t **stack, unsigned int line_number, int value);
 void pop(stack_t **stack, unsigned int line_number, int value); // Declare the pop function
 void swap(stack_t **stack, unsigned int line_number, int value); // Declare the swap function
+void add(stack_t **stack, unsigned int line_number, int value); // Declare the add function
 const instruction_t *get_instruction(char *opcode);
 
 #endif

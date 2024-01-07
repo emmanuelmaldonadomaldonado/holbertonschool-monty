@@ -6,15 +6,15 @@
  */
 void free_stack(stack_t **stack)
 {
-	stack_t *current = *stack;
-	stack_t *temp;
+    stack_t *current = *stack;
+    stack_t *temp;
 
-	while (current != NULL)
-	{
-		temp = current->next;
-		free(current);
-		current = temp;
-	}
+    while (current != NULL)
+    {
+        temp = current->next;
+        free(current);
+        current = temp;
+    }
 
-	*stack = NULL;
+    *stack = NULL;
 }

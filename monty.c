@@ -6,19 +6,23 @@ global_var var_global;
  * @av: opcode file
  * Return: 0
  */
-int main(int ac, char **av)
+int main(int argc, char *argv[])
 {
-	stack_t *stack;
+    if (argc != 2)
+    {
+        fprintf(stderr, "USAGE: monty file\n");
+        exit(EXIT_FAILURE);
+    }
 
-	stack = NULL;
-	if (ac != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+    FILE *file = fopen(argv[1], "r");
+    if (!file)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
 
-	read_file(av[1], &stack);
-    /* recordar liberar memoria */
-	free_dlistint(stack);
-	return (0);
+    /* Add more logic to read and interpret Monty bytecode file */
+    
+    fclose(file);
+    return 0;
 }

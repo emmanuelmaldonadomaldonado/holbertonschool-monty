@@ -53,6 +53,22 @@ typedef struct global_variable
 	char *buffer;
 } global_var;
 
+/**
+ * struct bus_s - variables -args, file, line content
+ * @arg: value
+ * @file: pointer to monty file
+ * @content: line content
+ * @lifi: flag change stack <-> queue
+ * Description: carries values through the program
+ */
+typedef struct bus_s
+{
+	char *arg;
+	FILE *file;
+	char *content;
+	int lifi;
+}  bus_t;
+
 extern global_var var_global;
 
 void read_file(char *filename, stack_t **stack);

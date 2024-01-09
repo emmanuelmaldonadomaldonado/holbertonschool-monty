@@ -1,82 +1,53 @@
 #include "monty.h"
-
 /**
- * main - Main function.
+ * main - Execute the whole monty program
  *
- * @argc: Arguments count.
- * @argv: Arguments values.
+ * @ac: argument count
+ * @av: argument vector
  *
- * Return: SUCCESS, ERROR_FAILURE otherwise.
+ * Return: On sucess return 0.
  */
-
-int main(int argc, char *argv[])
+char **tokens = NULL; /* Global Variable */
+int main(int ac, char **av)
 {
-	char *opcode = NULL;
-	FILE *file;
+	int input_verification, line_number = 0;
+	char *cmd = NULL;
+	size_t buffer = 0;
+	FILE *fd; /* In order for our getline to send to a file we use this */
+	void (*valid_fun)(stack_t **, unsigned int, char *, FILE *) = NULL;
 	stack_t *stack = NULL;
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
-	unsigned int line_number = 0;
-	instruction_t opcodes[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"sub", sub},
-		{"add", add},
-		{"nop", nop},
-		{"div", div_func},
-		{"mul", mul_func},
-		{"mod", mod_func},
-		{NULL, NULL}};
 
-	if (argc != 2)
+	if (ac != 2)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
+		dprintf(STDERR_FILENO, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
-	file = fopen(argv[1], "r");
-	if (!file)
+	fd = fopen(av[1], "r");
+	if (fd == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		cleanup(file, line, stack);
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-
-	while ((read = getline(&line, &len, file)) != -1)
+	while ((input_verification = getline(&cmd, &buffer, fd)) > -1)
 	{
-		line_number++;
-		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
+		line_number++; /* Count the line we have read*/
+		if (strcmp(cmd, "\n") == 0 || *cmd == '#')
 			continue;
-
-		if (line[0] == '\n' || (line[0] == ' ' && line[1] == '\n'))
-			continue;
-
-		opcode = strtok(line, " \t\n$");
-
-		if (opcode != NULL && strcmp(opcode, "#") != 0)
+		tokens = tokenization(cmd, " \n");
+		if (tokens == NULL)
 		{
-			if (strcmp(opcode, "push") != 0 &&
-				strcmp(opcode, "pall") != 0 &&
-				strcmp(opcode, "pint") != 0 &&
-				strcmp(opcode, "pop") != 0 &&
-				strcmp(opcode, "swap") != 0 &&
-				strcmp(opcode, "add") != 0 &&
-				strcmp(opcode, "sub") != 0 &&
-				strcmp(opcode, "div") != 0 &&
-				strcmp(opcode, "mul") != 0 &&
-				strcmp(opcode, "mod") != 0 &&
-				strcmp(opcode, "nop") != 0)
-			{
-				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-				exit(EXIT_FAILURE);
-			}
-			command(opcode, &stack, line_number, opcodes);
+			free(tokens);
+			continue;
 		}
+		valid_fun = get_op_func(tokens[0]); /* Pair cmd with function*/
+		valid_fun(&stack, line_number, cmd, fd); /* Execute given cmd*/
+		buffer = 0;
+		reset_inside(cmd, tokens);
+		cmd = NULL;
+		tokens = NULL;
 	}
-	cleanup(file, line, stack);
-	return (EXIT_SUCCESS);
+	free(cmd);
+	free_stack(stack);
+	fclose(fd);
+	exit(EXIT_SUCCESS);
 }

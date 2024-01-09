@@ -1,20 +1,47 @@
 #include "monty.h"
-
 /**
- * free_stack - Frees the memory used by the stack elements
- * @stack: Pointer to the stack
+ * free_array - function to free a array
+ * @tokens: array to be free
+ * Return: Theres no return. (void)
  */
-void free_stack(stack_t **stack)
+void free_array(char **tokens)
 {
-    stack_t *current = *stack;
-    stack_t *temp;
+	int i = 0;
 
-    while (current != NULL)
-    {
-        temp = current->next;
-        free(current);
-        current = temp;
-    }
+	while (tokens[i])
+	{
+		free(tokens[i]);
+		i++;
+	}
 
-    *stack = NULL;
+	free(tokens);
+}
+
+#include "monty.h"
+/**
+ * free_stack - function that frees a list
+ * @stack: pointer to the start of the list
+ */
+void free_stack(stack_t *stack)
+{
+	stack_t *tmp;
+
+	while (stack != NULL)
+	{
+		tmp = stack;
+		stack = tmp->next;
+		free(tmp);
+	}
+}
+
+#include "monty.h"
+/**
+ * reset_inside - function is at the end of the loop to reset everything
+ * @cmd: cmd that we get from getline
+ * @tokens: two dimension array
+ */
+void reset_inside(char *cmd, char **tokens)
+{
+	free(cmd);
+	free_array(tokens);
 }

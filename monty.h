@@ -1,11 +1,11 @@
 #ifndef MONTY_H
 #define MONTY_H
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
+#include <unistd.h>
+#include <string.h> 
+#include <ctype.h> 
+extern char **tokens;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -15,12 +15,11 @@
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
-
 typedef struct stack_s
 {
-    int n;
-    struct stack_s *prev;
-    struct stack_s *next;
+int n;
+struct stack_s *prev;
+struct stack_s *next;
 } stack_t;
 
 /**
@@ -31,28 +30,26 @@ typedef struct stack_s
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO
  */
-
 typedef struct instruction_s
 {
-  char *opcode;
-  void (*f)(stack_t **stack, unsigned int line_number);
+char *opcode;
+void (*f)(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
 } instruction_t;
 
-void add(stack_t **stack, unsigned int line_number);
-void cleanup(FILE *file, char *line, stack_t *stack);
-void command(char *opcode, stack_t **stack,
-			 unsigned int line_number, instruction_t opcodes[]);
-void div_func(stack_t **stack, unsigned int line_number);
-void free_stack(stack_t **stack);
-int main(int argc, char *argv[]);
-void mod_func(stack_t **stack, unsigned int line_number);
-void mul_func(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-
-#endif /* MONTY_H */
+int main(int ac, char **av);
+char **tokenization(char *ptr, char *delim);
+void push(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void pall(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void pint(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void pop(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void nop(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void swap(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void add(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void sub(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void _div(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void mul(stack_t **stack, unsigned int line_number, char *cmd, FILE *fd);
+void free_array(char **tokens);
+void free_stack(stack_t *stack);
+void reset_inside(char *cmd, char **tokens);
+void (*get_op_func(char *cmd))(stack_t **, unsigned int, char *cmd, FILE *fd);
+#endif

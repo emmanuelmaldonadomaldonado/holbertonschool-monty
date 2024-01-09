@@ -1,5 +1,7 @@
 #include "monty.h"
 /**
+ * get_op_func - Get operating function using a two dimension array
+ *
  * @cmd: the string to be cmp in the array.
  *
  * Return: the function to be executed

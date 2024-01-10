@@ -1,5 +1,5 @@
 #include "monty.h"
-#include "monty2.h"
+#include "instrutionmonty.h"
 #include "my_file.h"
 
 /**

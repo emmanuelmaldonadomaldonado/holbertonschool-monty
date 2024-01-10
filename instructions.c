@@ -1,5 +1,4 @@
-#include "instrcutions.h"
-
+#include "instructions.h"
 
 /**
  * get_instructions - Get the array of instructions

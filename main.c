@@ -1,41 +1,59 @@
-#include"monty.h"
+#include "monty.h"
+#include "monty2.h"
+#include "my_file.h"
 
 /**
- * main - Main entry
- * Description: Monty bytecodes files interpreter
- * @argc: total of arguments
- * @argv: The arguments, monty files
- * Return: Always return 0
+ * main - Entry point for Monty interpreter
+ * @argc: Number of arguments
+ * @argv: Array of arguments passed to the program
+ *
+ * Return: Always 0 on success
  */
-int main(int argc, char **argv)
+instruction_t my_instructions[] = {
+    { "push", push },
+    { "pop", pop },
+    { NULL, NULL }
+};
+
+int main(int argc, char *argv[])
+
 {
-	char *token = NULL;
-	unsigned int linenum = 0;
-	size_t size = 0;
-	stack_t *head = NULL;
+	instruction_t *my_instructions = get_instructions();
+	FILE *file = fopen(argv[1], "r");
+	char *line = NULL;
+	char *opcode = NULL;
+	size_t len = 0;
+	unsigned int line_number = 0;
+	stack_t *stack = NULL;
+	int i;
 
 	if (argc != 2)
-		error_arguments();
-
-	FILE *doc = fopen(argv[1], "r");
-
-	if (doc == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
-	while (getline(&token, &size, doc) != -1)
+	my_file(file, argv);
+	while ((getline(&line, &len, file)) != -1)
 	{
-		linenum++;
-		get_op_code(token, linenum, &head);
+		line_number++;
+		opcode = strtok(line, " \n");
+		if (opcode == NULL || *opcode == '#')
+			continue;
+		for (i = 0; my_instructions[i].opcode != NULL; i++)
+		{
+			if (strcmp(opcode, my_instructions[i].opcode) == 0)
+			{
+				my_instructions[i].f(&stack, line_number);
+				break;
+			}
+		}
+		if (my_instructions[i].opcode == NULL)
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+			cleanup_resources(file, line, &stack);
+			exit(EXIT_FAILURE);
+		}
 	}
-	/* closing file */
-	fclose(doc);
-
-	/* Free separated memory */
-	free(token);
-	free_stack(head);
-
+	cleanup_resources(file, line, &stack);
 	return (0);
 }

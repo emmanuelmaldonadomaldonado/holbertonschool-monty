@@ -1,7 +1,6 @@
-#ifndef _MONTY_H_
-#define _MONTY_H_
+#ifndef MONTY_H
+#define MONTY_H
 
-/* Libraries */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,13 +13,14 @@
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO Holberton project
+ * for stack, queues, LIFO, FIFO
  */
+
 typedef struct stack_s
 {
-	int n;
-	struct stack_s *prev;
-	struct stack_s *next;
+  int n;
+  struct stack_s *prev;
+  struct stack_s *next;
 } stack_t;
 
 /**
@@ -29,38 +29,24 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO Holberton project
+ * for stack, queues, LIFO, FIFO
  */
+
 typedef struct instruction_s
 {
-	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+  char *opcode;
+  void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* error_handler 1 */
-void error_arguments(void);
-void invalidInstruction_error(char *op_code, unsigned int line_number);
-void not_int_err(unsigned int line_number);
-void malloc_error(void);
-
-/* error handler 2 */
-void pint_error(unsigned int line_number);
-void pop_error(unsigned int line_number);
-void swap_error(unsigned int line_number);
-void add_error(unsigned int line_number);
-
-/*opcodes */
-void get_op_code(char *token, unsigned int line_number, stack_t **head);
-
-/* Stack */
-void push_stack(stack_t **head, unsigned int line_number);
-void pall_stack(stack_t **head, unsigned int line_number);
-void free_stack(stack_t *head);
-void pint_stack(stack_t **head, unsigned int line_number);
-void pop_stack(stack_t **head, unsigned int line_number);
-
-/* stack operations */
-void _swap(stack_t **head, unsigned int line_number);
-void _add(stack_t **head, unsigned int line_number);
-void _nop(stack_t **head, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void cleanup_resources(FILE *file, char *line, stack_t **stack);
+void my_file(FILE *file, char **argv);
+void free_stack(stack_t **stack);
+int main(int argc, char *argv[]);
 #endif

@@ -6,7 +6,7 @@
  * Return: Pointer to the array of instructions
  */
 
-instruction_t *get_instructions(void)
+const instruction_t *get_instruction(char *opcode)
 {
 	static instruction_t my_instructions[] = {
 		{"push", push},

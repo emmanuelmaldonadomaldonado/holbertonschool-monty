@@ -1,4 +1,11 @@
-#include "monty2.h"
+#include "instrcutions.h"
+
+
+/**
+ * get_instructions - Get the array of instructions
+ *
+ * Return: Pointer to the array of instructions
+ */
 
 instruction_t *get_instructions(void)
 {

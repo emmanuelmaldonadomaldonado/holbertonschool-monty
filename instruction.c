@@ -1,28 +1,24 @@
-// instruction.c
+#include "instructions.h"
 
-#include "monty.h"
-#include <string.h>
+/**
+ * get_instructions - Get the array of instructions
+ *
+ * Return: Pointer to the array of instructions
+ */
 
-instruction_t instructions[] = {
-    {"push", push},
-    {"pall", pall},
-    {"pint", pint},
-    {"pop", pop},
-    {"swap", swap},
-    {"add", add},
-    {"nop", nop},
-    {NULL, NULL} // Marcar el final del array
-};
-
-const instruction_t *get_instruction(char *opcode)
+instruction_t *get_instructions(void)
 {
-    for (int i = 0; instructions[i].opcode; i++)
-    {
-        if (strcmp(instructions[i].opcode, opcode) == 0)
-        {
-            return &instructions[i];
-        }
-    }
-    return NULL; // Instrucción no encontrada
+	static instruction_t my_instructions[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{"nop", nop},
+		{"swap", swap},
+		{"add", add},
+		{NULL, NULL}
+	};
+
+	return (my_instructions);
 }
 

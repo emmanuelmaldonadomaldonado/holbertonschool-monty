@@ -2,6 +2,7 @@
 #define INSTRUCTIONS_H
 
 #include "monty.h"
+#include "instrutionmonty.h"
 
 instruction_t *get_instructions(void);
 void cleanup_resources(FILE *file, char *line, stack_t **stack);

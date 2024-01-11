@@ -1,23 +1,20 @@
 #include "instructions.h"
 
 /**
- * get_instructions - Get the array of instructions
- *
- * Return: Pointer to the array of instructions
+ * cleanup_resources - Clean up resources
+ * @file: File pointer to close
+ * @line: Line buffer to free
+ * @stack: Pointer to the stack to free
  */
-
-instruction_t *get_instructions(void)
+void cleanup_resources(FILE *file, char *line, stack_t **stack)
 {
-	static instruction_t my_instructions[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"nop", nop},
-		{"swap", swap},
-		{"add", add},
-		{NULL, NULL}
-	};
+    if (file != NULL)
+        fclose(file);
 
-	return (my_instructions);
+    if (line != NULL)
+        free(line);
+
+    if (stack != NULL)
+        free_stack(stack);
 }
+

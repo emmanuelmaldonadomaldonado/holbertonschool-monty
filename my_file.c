@@ -14,3 +14,4 @@ void my_file(FILE *file, char **argv)
 		exit(EXIT_FAILURE);
 	}
 }
+

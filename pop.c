@@ -24,3 +24,10 @@ void pop(stack_t **stack, unsigned int line_number)
 
 	free(temp);
 }
+
+void cleanup_resources(FILE *file, char *line, stack_t **stack)
+{
+    (void)file;
+    (void)line;
+    (void)stack;
+}

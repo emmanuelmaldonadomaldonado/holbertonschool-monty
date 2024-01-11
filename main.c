@@ -12,6 +12,10 @@
 instruction_t my_instructions[] = {
     { "push", push },
     { "pop", pop },
+    { "pall", pall },
+    { "pint", pint },
+    { "swap", swap },
+    { "add", add },
     { NULL, NULL }
 };
 

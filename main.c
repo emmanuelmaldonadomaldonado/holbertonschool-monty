@@ -1,7 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 int main(int argc, char *argv[])
 {
@@ -55,6 +52,9 @@ int main(int argc, char *argv[])
             else
             {
                 fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+                free(buffer);
+                fclose(file);
+                free_stack(stack);  /* Free the stack before exiting */
                 exit(EXIT_FAILURE);
             }
         }
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 
     fclose(file);
     free(buffer);
-    /* You don't need to free the stack here, as the pall function will do it if necessary */
+    free_stack(stack);  /* Free the stack before exiting */
 
     return 0;
 }

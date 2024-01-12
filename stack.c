@@ -30,4 +30,14 @@ void queue(stack_t **stack, unsigned int line_number)
     (void)stack;
     (void)line_number;
 }
+#include "monty.h"
 
+void free_stack(stack_t *stack)
+{
+    while (stack != NULL)
+    {
+        stack_t *temp = stack;
+        stack = stack->next;
+        free(temp);
+    }
+}

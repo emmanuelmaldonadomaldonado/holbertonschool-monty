@@ -1,47 +1,72 @@
 #include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 
+/* Function prototypes */
+int is_integer(const char *str);
+stack_t *push_stack(stack_t **stack, int n);
+
 /**
- * push - pushes an element to the stack
- * @stack: pointer to the stack
- * @line_number: line number in the file
+ * push - Pushes an element to the stack.
+ * @stack: A pointer to the top of the stack.
+ * @line_number: The current line number in the Monty file.
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-    char *arg = strtok(NULL, " \n");
-    int num;
-    stack_t *new_node;
-    size_t i = 0;
+    int value;
 
-    if (arg == NULL || (arg[0] == '-' && arg[1] == '\0'))
+    if (!arg || !is_integer(arg))
     {
-        fprintf(stderr, "L%d: usage: push integer\n", line_number);
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
         exit(EXIT_FAILURE);
     }
 
-    while (arg[i] != '\0')
-    {
-        if (!isdigit((unsigned char)arg[i]) && !(arg[i] == '-' && isdigit((unsigned char)arg[i + 1])) && !(arg[i] == '+'))
-        {
-            fprintf(stderr, "L%d: usage: push integer\n", line_number);
-            exit(EXIT_FAILURE);
-        }
-        i++;
-    }
-
-    num = atoi(arg);
-
-    new_node = malloc(sizeof(stack_t));
-    if (new_node == NULL)
+    value = atoi(arg);
+    if (!push_stack(stack, value))
     {
         fprintf(stderr, "Error: malloc failed\n");
         exit(EXIT_FAILURE);
     }
+}
 
-    new_node->n = num;
+/**
+ * is_integer - Checks if a string represents a valid integer.
+ * @str: The string to be checked.
+ *
+ * Return: 1 if the string is a valid integer, 0 otherwise.
+ */
+int is_integer(const char *str)
+{
+    int i;
+
+    if (!str)
+        return 0;
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        if (!isdigit((unsigned char)str[i]) && (i == 0 && str[i] != '-' && str[i] != '+'))
+            return 0;
+    }
+
+    return 1;
+}
+/**
+ * push_stack - Pushes a new element to the stack.
+ * @stack: A pointer to the top of the stack.
+ * @n: The value to be pushed onto the stack.
+ *
+ * Return: A pointer to the newly created element.
+ */
+stack_t *push_stack(stack_t **stack, int n)
+{
+    stack_t *new_node;
+
+    new_node = malloc(sizeof(stack_t));
+    if (!new_node)
+        return NULL;
+
+    new_node->n = n;
     new_node->prev = NULL;
     new_node->next = *stack;
 
@@ -49,4 +74,6 @@ void push(stack_t **stack, unsigned int line_number)
         (*stack)->prev = new_node;
 
     *stack = new_node;
+
+    return new_node;
 }

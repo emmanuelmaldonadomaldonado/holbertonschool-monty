@@ -1,9 +1,9 @@
-// main.c
-
 #include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+char *arg = NULL;
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    stack_t *stack = NULL; // Inicializar la pila
+    stack_t *stack = NULL; /* Initialize the stack */
 
     char *buffer = NULL;
     size_t size = 0;
@@ -29,34 +29,34 @@ int main(int argc, char *argv[])
 
     while ((read_line = getline(&buffer, &size, file)) != -1)
     {
-        // Eliminar el salto de línea al final, si existe
+        /* Remove the newline character at the end, if it exists */
         size_t len = strlen(buffer);
         if (len > 0 && buffer[len - 1] == '\n')
             buffer[len - 1] = '\0';
 
-        //printf("Processing line: %s\n", buffer);
-
-        // Parse y ejecuta la operación correspondiente
+        /* Parse and execute the corresponding operation */
         char *opcode = strtok(buffer, " ");
         if (opcode != NULL)
         {
+            arg = strtok(NULL, " "); /* Get the second token as the argument */
             const instruction_t *instruction = get_instruction(opcode);
             if (instruction)
             {
-                instruction->f(&stack, line_number); // Corrected function call
+                instruction->f(&stack, line_number); /* Corrected function call */
             }
         }
 
-        // Limpiar el buffer para la próxima línea
+        /* Clear the buffer for the next line */
         free(buffer);
         buffer = NULL;
         size = 0;
-        line_number++; // Increment line number for each line processed
+        line_number++; /* Increment line number for each line processed */
     }
 
     fclose(file);
     free(buffer);
-    // No necesitas liberar la pila aquí, ya que la función pall lo hará si es necesario
+    /* You don't need to free the stack here, as the pall function will do it if necessary */
 
     return 0;
 }
+

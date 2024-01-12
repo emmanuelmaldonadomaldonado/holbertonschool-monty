@@ -1,21 +1,22 @@
-// swap.c
-
 #include "monty.h"
-#include <stdio.h>
 
+/**
+ * swap - Swaps the top two elements of the stack.
+ * @stack: Double pointer to the head of the stack.
+ * @line_number: Line number in the Monty byte code file.
+ */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *next_node;
-	int temp;
+    int temp;
 
-	if (*stack == NULL || (*stack)->next == NULL)
-	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
+    if (!stack || !*stack || !(*stack)->next)
+    {
+        fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
 
-	next_node = (*stack)->next;
-	temp = (*stack)->n;
-	(*stack)->n = next_node->n;
-	next_node->n = temp;
+    temp = (*stack)->n;
+    (*stack)->n = (*stack)->next->n;
+    (*stack)->next->n = temp;
 }
+

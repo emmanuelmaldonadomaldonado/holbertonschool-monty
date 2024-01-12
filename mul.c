@@ -1,19 +1,19 @@
 #include "monty.h"
 
 /**
- * add - Adds the top two elements of the stack.
+ * mul_op - Multiplies the second top element of the stack with the top element.
  * @stack: Double pointer to the head of the stack.
  * @line_number: Line number in the Monty byte code file.
  */
-void add(stack_t **stack, unsigned int line_number)
+void mul_op(stack_t **stack, unsigned int line_number)
 {
     if (!stack || !*stack || !(*stack)->next)
     {
-        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+        fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
         exit(EXIT_FAILURE);
     }
 
-    (*stack)->next->n += (*stack)->n;
+    (*stack)->next->n *= (*stack)->n;
     pop(stack, line_number);
 }
 

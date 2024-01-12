@@ -1,13 +1,13 @@
 #include "monty.h"
+#include <stdio.h>
+
 /**
  * pall - Prints all the values on the stack, starting from the top.
  * @stack: A pointer to the top of the stack.
  * @line_number: The current line number in the Monty file.
  */
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
-    (void)line_number;
-
     stack_t *current = *stack;
 
     while (current != NULL)

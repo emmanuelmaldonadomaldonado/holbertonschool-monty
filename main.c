@@ -25,6 +25,15 @@ int main(int argc, char *argv[])
     ssize_t read_line;
     unsigned int line_number = 0;
 
+    /* Array of supported opcodes and their corresponding functions */
+    const instruction_t instructions[] = {
+        {"push", push},
+        {"pall", pall},
+        {"pint", pint},
+        /* Add other opcodes and their corresponding functions here */
+        {NULL, NULL} /* Null terminator to mark the end of the array */
+    };
+
     while ((read_line = getline(&buffer, &size, file)) != -1)
     {
         line_number++;
@@ -38,7 +47,7 @@ int main(int argc, char *argv[])
         char *opcode = strtok(buffer, " ");
         if (opcode != NULL)
         {
-            const instruction_t *instruction = get_instruction(opcode);
+            const instruction_t *instruction = get_instruction(opcode, instructions);
             if (instruction)
             {
                 instruction->f(&stack, line_number);
@@ -62,3 +71,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+

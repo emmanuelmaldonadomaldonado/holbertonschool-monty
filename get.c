@@ -1,24 +1,20 @@
 #include "monty.h"
-#include <string.h>
 
-/* Define the opcodes array here */
-const instruction_t opcodes[] = {
-    {"push", push},
-    /* Add other instructions here */
-    {NULL, NULL} /* This is the end-of-array marker */
-};
-
-const instruction_t *get_instruction(char *opcode)
+/**
+ * get_instruction - Searches for the opcode in the instructions array.
+ * @opcode: The opcode to search for.
+ * @instructions: The array of supported instructions.
+ *
+ * Return: A pointer to the corresponding instruction, or NULL if not found.
+ */
+const instruction_t *get_instruction(char *opcode, const instruction_t *instructions)
 {
-    int i;
-
-    if (!opcode)
-        return NULL;
-
-    for (i = 0; opcodes[i].opcode; i++)
+    while (instructions->opcode)
     {
-        if (strcmp(opcodes[i].opcode, opcode) == 0)
-            return &opcodes[i];
+        if (strcmp(opcode, instructions->opcode) == 0)
+            return instructions;
+
+        instructions++;
     }
 
     return NULL;

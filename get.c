@@ -9,14 +9,14 @@
  */
 const instruction_t *get_instruction(char *opcode, const instruction_t *instructions)
 {
-    while (instructions->opcode)
-    {
-        if (strcmp(opcode, instructions->opcode) == 0)
-            return instructions;
+	while (instructions->opcode)
+	{
+		if (strcmp(opcode, instructions->opcode) == 0)
+			return instructions;
 
-        instructions++;
-    }
+		instructions++;
+	}
 
-    return NULL;
+	return NULL;
 }
 

@@ -3,9 +3,9 @@
 #include "monty.h"
 #include <stdio.h>
 
-void swap(stack_t **stack, unsigned int line_number, int value)
+void swap(stack_t **stack, unsigned int line_number)
 {
-    (void)value;
+    (void)line_number;
 
     if (*stack == NULL || (*stack)->next == NULL)
     {

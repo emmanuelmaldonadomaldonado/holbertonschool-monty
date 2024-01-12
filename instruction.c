@@ -11,7 +11,7 @@ instruction_t instructions[] = {
     {"swap", swap},
     {"add", add},
     {"nop", nop},
-    {NULL, NULL} // Marcar el final del array
+    {NULL, NULL} // Mark the end of the array
 };
 
 const instruction_t *get_instruction(char *opcode)
@@ -23,5 +23,5 @@ const instruction_t *get_instruction(char *opcode)
             return &instructions[i];
         }
     }
-    return NULL; // Instrucción no encontrada
+    return NULL; // Instruction not found
 }

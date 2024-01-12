@@ -3,17 +3,16 @@
 #include "monty.h"
 #include <stdio.h>
 
-void pall(stack_t **stack, unsigned int line_number, int value)
+void pall(stack_t **stack, unsigned int line_number)
 {
+    (void)line_number;  // Not using line_number in this function
+
     stack_t *current = *stack;
 
-    (void)value;  // Evitar el warning de variable no utilizada
-    (void)line_number;
-    (void)stack;
-
-    while (current != NULL)
+    while (current)
     {
         printf("%d\n", current->n);
         current = current->next;
     }
 }
+

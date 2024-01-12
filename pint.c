@@ -3,9 +3,9 @@
 #include "monty.h"
 #include <stdio.h>
 
-void pint(stack_t **stack, unsigned int line_number, int value)
+void pint(stack_t **stack, unsigned int line_number)
 {
-    (void)value;
+    (void)line_number;
 
     if (*stack == NULL)
     {

@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *arg = NULL;
-
 int main(int argc, char *argv[])
 {
     if (argc != 2)
@@ -29,20 +27,29 @@ int main(int argc, char *argv[])
 
     while ((read_line = getline(&buffer, &size, file)) != -1)
     {
+        line_number++;
+
         /* Remove the newline character at the end, if it exists */
         size_t len = strlen(buffer);
         if (len > 0 && buffer[len - 1] == '\n')
             buffer[len - 1] = '\0';
 
+        printf("DEBUG: Line %u: %s\n", line_number, buffer); // Debug print
+
         /* Parse and execute the corresponding operation */
         char *opcode = strtok(buffer, " ");
         if (opcode != NULL)
         {
-            arg = strtok(NULL, " "); /* Get the second token as the argument */
             const instruction_t *instruction = get_instruction(opcode);
             if (instruction)
             {
-                instruction->f(&stack, line_number); /* Corrected function call */
+                printf("DEBUG: Line %u: Calling %s\n", line_number, opcode); // Debug print
+                instruction->f(&stack, line_number);
+            }
+            else
+            {
+                fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+                exit(EXIT_FAILURE);
             }
         }
 
@@ -50,7 +57,6 @@ int main(int argc, char *argv[])
         free(buffer);
         buffer = NULL;
         size = 0;
-        line_number++; /* Increment line number for each line processed */
     }
 
     fclose(file);
@@ -59,4 +65,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-

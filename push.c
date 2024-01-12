@@ -3,9 +3,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-/* Function prototypes */
+/* Function prototype */
 int is_integer(const char *str);
-stack_t *push_stack(stack_t **stack, int n);
 
 /**
  * push - Pushes an element to the stack.
@@ -15,7 +14,8 @@ stack_t *push_stack(stack_t **stack, int n);
 void push(stack_t **stack, unsigned int line_number)
 {
     char *arg = strtok(NULL, " \n");
-    int value;
+
+    printf("DEBUG: Line %u: arg = %s\n", line_number, arg);
 
     if (!arg || !is_integer(arg))
     {
@@ -23,8 +23,10 @@ void push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 
-    value = atoi(arg);
-    if (!push_stack(stack, value))
+    int value = atoi(arg);
+    stack_t *new_node = push_stack(stack, value);
+
+    if (!new_node)
     {
         fprintf(stderr, "Error: malloc failed\n");
         exit(EXIT_FAILURE);
@@ -39,12 +41,10 @@ void push(stack_t **stack, unsigned int line_number)
  */
 int is_integer(const char *str)
 {
-    int i;
-
     if (!str)
         return 0;
 
-    for (i = 0; str[i] != '\0'; i++)
+    for (int i = 0; str[i] != '\0'; i++)
     {
         if (!isdigit((unsigned char)str[i]) && (i == 0 && str[i] != '-' && str[i] != '+'))
             return 0;
@@ -62,9 +62,7 @@ int is_integer(const char *str)
  */
 stack_t *push_stack(stack_t **stack, int n)
 {
-    stack_t *new_node;
-
-    new_node = malloc(sizeof(stack_t));
+    stack_t *new_node = malloc(sizeof(stack_t));
     if (!new_node)
         return NULL;
 

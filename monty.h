@@ -5,14 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char *arg;  // Declare arg as extern
+extern char *arg;
 
 /* Other includes and structures */
 
 #define STACK_MODE 0
 #define QUEUE_MODE 1
 
-/* Function prototypes and other declarations */
 /* Data structure for a stack (or queue) element */
 typedef struct stack_s
 {

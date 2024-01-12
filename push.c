@@ -14,6 +14,7 @@ stack_t *push_stack(stack_t **stack, int n);
  */
 void push(stack_t **stack, unsigned int line_number)
 {
+    char *arg = strtok(NULL, " \n");
     int value;
 
     if (!arg || !is_integer(arg))
@@ -51,6 +52,7 @@ int is_integer(const char *str)
 
     return 1;
 }
+
 /**
  * push_stack - Pushes a new element to the stack.
  * @stack: A pointer to the top of the stack.
@@ -77,3 +79,4 @@ stack_t *push_stack(stack_t **stack, int n)
 
     return new_node;
 }
+

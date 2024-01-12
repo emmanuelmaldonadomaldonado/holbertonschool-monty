@@ -15,8 +15,6 @@ void push(stack_t **stack, unsigned int line_number)
 {
     char *arg = strtok(NULL, " \n");
 
-    printf("DEBUG: Line %u: arg = %s\n", line_number, arg);
-
     if (!arg || !is_integer(arg))
     {
         fprintf(stderr, "L%u: usage: push integer\n", line_number);
@@ -77,4 +75,3 @@ stack_t *push_stack(stack_t **stack, int n)
 
     return new_node;
 }
-

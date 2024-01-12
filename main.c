@@ -34,8 +34,6 @@ int main(int argc, char *argv[])
         if (len > 0 && buffer[len - 1] == '\n')
             buffer[len - 1] = '\0';
 
-        printf("DEBUG: Line %u: %s\n", line_number, buffer); // Debug print
-
         /* Parse and execute the corresponding operation */
         char *opcode = strtok(buffer, " ");
         if (opcode != NULL)
@@ -43,7 +41,6 @@ int main(int argc, char *argv[])
             const instruction_t *instruction = get_instruction(opcode);
             if (instruction)
             {
-                printf("DEBUG: Line %u: Calling %s\n", line_number, opcode); // Debug print
                 instruction->f(&stack, line_number);
             }
             else

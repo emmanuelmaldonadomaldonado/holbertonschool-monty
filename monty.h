@@ -49,6 +49,6 @@ void queue(stack_t **stack, unsigned int line_number);
 
 /* Additional function prototypes */
 const instruction_t *get_instruction(char *opcode, const instruction_t *instructions);
-void free_stack(stack_t *stack);  /* Declaration of free_stack */
+void free_stack(stack_t *stack);
 
 #endif /* MONTY_H */

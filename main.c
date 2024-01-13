@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
-		/* Add other opcodes and their corresponding functions here */
+		{"pop", pop},
+		{"swap", swap}, //adding 
 		{NULL, NULL} /* Null terminator to mark the end of the array */
 	};
 	while ((read_line = getline(&buffer, &size, file)) != -1)

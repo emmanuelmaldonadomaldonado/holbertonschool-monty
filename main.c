@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
                 {"pop", pop},
                 {"swap", swap}, //adding
 		{"add", add},
+		{"nop", nop},
+		{"sub", sub},
                 {NULL, NULL} /* Null terminator to mark the end of the array */
         };
         while ((read_line = getline(&buffer, &size, file)) != -1)
